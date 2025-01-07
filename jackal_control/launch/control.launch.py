@@ -91,7 +91,7 @@ def generate_launch_description():
         # Joint State Broadcaster
         Node(
             package='controller_manager',
-            executable='spawner.py',
+            executable='spawner',
             arguments=['joint_state_broadcaster'],
             output='screen',
         ),
@@ -99,7 +99,7 @@ def generate_launch_description():
         # Velocity Controller
         Node(
             package='controller_manager',
-            executable='spawner.py',
+            executable='spawner',
             arguments=['jackal_velocity_controller'],
             output='screen',
         )
