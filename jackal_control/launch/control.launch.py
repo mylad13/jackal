@@ -41,16 +41,26 @@ def generate_launch_description():
         ]
     )
 
+    robot_description_content = ParameterValue(
+        Command(LaunchConfiguration('robot_description_command')),
+        value_type=str
+    )
+
     is_sim = LaunchConfiguration('is_sim', default=False)
 
     is_sim_arg = DeclareLaunchArgument(
         'is_sim',
         default_value=is_sim)
+    
+    namespace = LaunchConfiguration('namespace')
 
-    robot_description_content = ParameterValue(
-        Command(LaunchConfiguration('robot_description_command')),
-        value_type=str
+    # Declare namespace argument
+    namespace_arg = DeclareLaunchArgument(
+        'namespace',
+        default_value='',
+        description='Top-level namespace'
     )
+
 
     # Localization
     localization_group_action = GroupAction([
@@ -59,6 +69,7 @@ def generate_launch_description():
             package='robot_localization',
             executable='ekf_node',
             name='ekf_node',
+            namespace=namespace,
             output='screen',
             parameters=[config_jackal_ekf],
         ),
@@ -68,6 +79,7 @@ def generate_launch_description():
             package='imu_filter_madgwick',
             executable='imu_filter_madgwick_node',
             name='imu_filter_node',
+            namespace=namespace,
             output='screen',
             parameters=[config_imu_filter]
         )
@@ -93,6 +105,7 @@ def generate_launch_description():
             package='controller_manager',
             executable='spawner',
             arguments=['joint_state_broadcaster'],
+            namespace=namespace,
             output='screen',
         ),
 
@@ -101,6 +114,7 @@ def generate_launch_description():
             package='controller_manager',
             executable='spawner',
             arguments=['jackal_velocity_controller'],
+            namespace=namespace,
             output='screen',
         )
     ])
@@ -108,6 +122,7 @@ def generate_launch_description():
     ld = LaunchDescription()
     ld.add_action(robot_description_command_arg)
     ld.add_action(is_sim_arg)
+    ld.add_action(namespace_arg)
     ld.add_action(localization_group_action)
     ld.add_action(control_group_action)
     return ld
