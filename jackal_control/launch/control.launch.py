@@ -85,44 +85,65 @@ def generate_launch_description():
         )
     ])
 
-    # ROS2 Controllers
-    control_group_action = GroupAction([
-        # ROS2 Control
-        Node(
-            package='controller_manager',
-            executable='ros2_control_node',
-            parameters=[{'robot_description': robot_description_content},
-                        config_jackal_velocity_controller],
-            output={
-                'stdout': 'screen',
-                'stderr': 'screen',
-            },
-            condition=UnlessCondition(is_sim)
-        ),
+    velocity_controller_node = Node(
+        package='controller_manager',
+        executable='spawner',
+        name='velocity_controller_spawner',
+        namespace=namespace,
+        output='screen',
+        arguments=['jackal_velocity_controller'],
+        parameters=[config_jackal_velocity_controller]
+    )
 
-        # Joint State Broadcaster
-        Node(
-            package='controller_manager',
-            executable='spawner',
-            arguments=['joint_state_broadcaster'],
-            namespace=namespace,
-            output='screen',
-        ),
+    # Add the controller_manager node
+    controller_manager_node = Node(
+        package='controller_manager',
+        executable='ros2_control_node',
+        namespace=namespace,
+        output='screen',
+        parameters=[{'robot_description': robot_description_content},
+                    config_jackal_velocity_controller]
+    )
+    # # ROS2 Controllers
+    # control_group_action = GroupAction([
+    #     # ROS2 Control
+    #     Node(
+    #         package='controller_manager',
+    #         executable='ros2_control_node',
+    #         parameters=[{'robot_description': robot_description_content},
+    #                     config_jackal_velocity_controller],
+    #         output={
+    #             'stdout': 'screen',
+    #             'stderr': 'screen',
+    #         },
+    #         condition=UnlessCondition(is_sim)
+    #     ),
 
-        # Velocity Controller
-        Node(
-            package='controller_manager',
-            executable='spawner',
-            arguments=['jackal_velocity_controller'],
-            namespace=namespace,
-            output='screen',
-        )
-    ])
+    #     # Joint State Broadcaster
+    #     Node(
+    #         package='controller_manager',
+    #         executable='spawner',
+    #         arguments=['joint_state_broadcaster'],
+    #         namespace=namespace,
+    #         output='screen',
+    #     ),
+
+    #     # Velocity Controller
+    #     Node(
+    #         package='controller_manager',
+    #         executable='spawner',
+    #         arguments=['jackal_velocity_controller'],
+    #         namespace=namespace,
+    #         output='screen',
+    #     )
+    # ])
 
     ld = LaunchDescription()
     ld.add_action(robot_description_command_arg)
     ld.add_action(is_sim_arg)
     ld.add_action(namespace_arg)
     ld.add_action(localization_group_action)
-    ld.add_action(control_group_action)
+    ld.add_action(controller_manager_node)
+    ld.add_action(velocity_controller_node)
+
     return ld
