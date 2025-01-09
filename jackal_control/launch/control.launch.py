@@ -97,13 +97,17 @@ def generate_launch_description():
 
     # Add the controller_manager node
     controller_manager_node = Node(
-        package='controller_manager',
-        executable='ros2_control_node',
-        namespace=namespace,
-        output='screen',
-        parameters=[{'robot_description': robot_description_content},
-                    config_jackal_velocity_controller]
-    )
+            package='controller_manager',
+            executable='ros2_control_node',
+            parameters=[{'robot_description': robot_description_content},
+                        config_jackal_velocity_controller],
+            output={
+                'stdout': 'screen',
+                'stderr': 'screen',
+            },
+            condition=UnlessCondition(is_sim)
+        )
+
     # # ROS2 Controllers
     # control_group_action = GroupAction([
     #     # ROS2 Control
