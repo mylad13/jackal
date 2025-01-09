@@ -89,6 +89,7 @@ def generate_launch_description():
     controller_manager_node = Node(
             package='controller_manager',
             executable='ros2_control_node',
+            namespace=namespace,
             parameters=[config_jackal_velocity_controller],
             output={
                 'stdout': 'screen',
