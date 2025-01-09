@@ -95,7 +95,7 @@ def generate_launch_description():
                 'stdout': 'screen',
                 'stderr': 'screen',
             },
-            # condition=UnlessCondition(is_sim)
+            condition=UnlessCondition(is_sim)
         )
     
     velocity_controller_node = Node(
