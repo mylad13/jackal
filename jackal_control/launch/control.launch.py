@@ -85,6 +85,18 @@ def generate_launch_description():
         )
     ])
 
+    # Add the controller_manager node
+    controller_manager_node = Node(
+            package='controller_manager',
+            executable='ros2_control_node',
+            parameters=[config_jackal_velocity_controller],
+            output={
+                'stdout': 'screen',
+                'stderr': 'screen',
+            },
+            # condition=UnlessCondition(is_sim)
+        )
+    
     velocity_controller_node = Node(
         package='controller_manager',
         executable='spawner',
@@ -95,19 +107,15 @@ def generate_launch_description():
         parameters=[config_jackal_velocity_controller]
     )
 
-    # Add the controller_manager node
-    controller_manager_node = Node(
-            package='controller_manager',
-            executable='ros2_control_node',
-            parameters=[{'robot_description': robot_description_content},
-                        config_jackal_velocity_controller],
-            output={
-                'stdout': 'screen',
-                'stderr': 'screen',
-            },
-            condition=UnlessCondition(is_sim)
-        )
-
+    
+    # Add the joint_state_broadcaster spawner
+    joint_state_broadcaster_spawner = Node(
+        package='controller_manager',
+        executable='spawner',
+        namespace=namespace,
+        output='screen',
+        arguments=['joint_state_broadcaster']
+    )
     # # ROS2 Controllers
     # control_group_action = GroupAction([
     #     # ROS2 Control
@@ -148,6 +156,7 @@ def generate_launch_description():
     ld.add_action(namespace_arg)
     ld.add_action(localization_group_action)
     ld.add_action(controller_manager_node)
+    ld.add_action(joint_state_broadcaster_spawner)
     ld.add_action(velocity_controller_node)
 
     return ld
