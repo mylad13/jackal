@@ -104,8 +104,7 @@ def generate_launch_description():
         name='velocity_controller_spawner',
         namespace=namespace,
         output='screen',
-        arguments=['jackal_velocity_controller'],
-        parameters=[config_jackal_velocity_controller]
+        arguments=['jackal_velocity_controller']
     )
 
     
