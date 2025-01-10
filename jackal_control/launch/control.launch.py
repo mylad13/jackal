@@ -1,5 +1,5 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, GroupAction
+from launch.actions import DeclareLaunchArgument, GroupAction, ExecuteProcess
 from launch.conditions import UnlessCondition
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution, LaunchConfiguration
 from launch_ros.actions import Node
@@ -100,7 +100,7 @@ def generate_launch_description():
     
     velocity_controller_node = Node(
         package='controller_manager',
-        executable='spawner',
+        executable='spawner.py',
         name='velocity_controller_spawner',
         namespace=namespace,
         output='screen',
@@ -109,13 +109,21 @@ def generate_launch_description():
 
     
     # Add the joint_state_broadcaster spawner
-    joint_state_broadcaster_spawner = Node(
+    joint_state_broadcaster_node = Node(
         package='controller_manager',
-        executable='spawner',
+        executable='spawner.py',
         namespace=namespace,
         output='screen',
         arguments=['joint_state_broadcaster']
     )
+    # # Alternative way to add the joint_state_broadcaster, worth exploring:
+    # joint_state_broadcaster_node = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+    #          'joint_state_broadcaster'],
+    #     output='screen'
+    # )
+
+
     # # ROS2 Controllers
     # control_group_action = GroupAction([
     #     # ROS2 Control
@@ -156,7 +164,7 @@ def generate_launch_description():
     ld.add_action(namespace_arg)
     ld.add_action(localization_group_action)
     ld.add_action(controller_manager_node)
-    ld.add_action(joint_state_broadcaster_spawner)
+    ld.add_action(joint_state_broadcaster_node)
     ld.add_action(velocity_controller_node)
 
     return ld
