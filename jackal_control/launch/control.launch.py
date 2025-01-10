@@ -90,7 +90,8 @@ def generate_launch_description():
             package='controller_manager',
             executable='ros2_control_node',
             namespace=namespace,
-            parameters=[config_jackal_velocity_controller],
+            parameters=[{'robot_description': robot_description_content},
+                        config_jackal_velocity_controller],
             output={
                 'stdout': 'screen',
                 'stderr': 'screen',
