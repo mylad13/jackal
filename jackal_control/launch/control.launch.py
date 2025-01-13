@@ -127,7 +127,7 @@ def generate_launch_description():
     #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'jackal_velocity_controller'],
     #     output='screen',
     #     additional_env={'ROS_NAMESPACE': namespace}
-    )
+    # )
 
     # # ROS2 Controllers
     # control_group_action = GroupAction([
