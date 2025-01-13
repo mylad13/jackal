@@ -52,38 +52,34 @@ def generate_launch_description():
         'is_sim',
         default_value=is_sim)
     
-    namespace = LaunchConfiguration('namespace')
-
     # Declare namespace argument
     namespace_arg = DeclareLaunchArgument(
         'namespace',
         default_value='',
         description='Top-level namespace'
     )
+    
+    namespace = LaunchConfiguration('namespace')
 
 
-    # Localization
-    localization_group_action = GroupAction([
-        # Extended Kalman Filter
-        Node(
-            package='robot_localization',
-            executable='ekf_node',
-            name='ekf_node',
-            namespace=namespace,
-            output='screen',
-            parameters=[config_jackal_ekf],
-        ),
+    # Define nodes with namespace
+    ekf_node = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
+        namespace=namespace,
+        output='screen',
+        parameters=[config_jackal_ekf]
+    )
 
-        # Madgwick Filter
-        Node(
-            package='imu_filter_madgwick',
-            executable='imu_filter_madgwick_node',
-            name='imu_filter_node',
-            namespace=namespace,
-            output='screen',
-            parameters=[config_imu_filter]
-        )
-    ])
+    imu_filter_node = Node(
+        package='imu_filter_madgwick',
+        executable='imu_filter_node',
+        name='imu_filter',
+        namespace=namespace,
+        output='screen',
+        parameters=[config_imu_filter]
+    )
 
     # Add the controller_manager node
     controller_manager_node = Node(
@@ -98,31 +94,39 @@ def generate_launch_description():
             condition=UnlessCondition(is_sim)
         )
     
-    velocity_controller_node = Node(
-        package='controller_manager',
-        executable='spawner.py',
-        name='velocity_controller_spawner',
-        namespace=namespace,
-        output='screen',
-        arguments=['jackal_velocity_controller']
-    )
-
-    
-    # Add the joint_state_broadcaster spawner
-    joint_state_broadcaster_node = Node(
-        package='controller_manager',
-        executable='spawner.py',
-        namespace=namespace,
-        output='screen',
-        arguments=['joint_state_broadcaster']
-    )
-    # # Alternative way to add the joint_state_broadcaster, worth exploring:
-    # joint_state_broadcaster_node = ExecuteProcess(
-    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-    #          'joint_state_broadcaster'],
-    #     output='screen'
+    # velocity_controller_node = Node(
+    #     package='controller_manager',
+    #     executable='spawner.py',
+    #     name='velocity_controller_spawner',
+    #     namespace=namespace,
+    #     output='screen',
+    #     arguments=['jackal_velocity_controller']
     # )
 
+    
+    # # Add the joint_state_broadcaster spawner
+    # joint_state_broadcaster_node = Node(
+    #     package='controller_manager',
+    #     executable='spawner.py',
+    #     namespace=namespace,
+    #     output='screen',
+    #     arguments=['joint_state_broadcaster']
+    # )
+    
+    # Alternative way to add the nodes, worth exploring:
+    # Add the joint_state_broadcaster spawner
+    joint_state_broadcaster_spawner = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'joint_state_broadcaster'],
+        output='screen',
+        additional_env={'ROS_NAMESPACE': namespace}
+    )
+
+    # Add the velocity_controller spawner
+    velocity_controller_spawner = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'jackal_velocity_controller'],
+        output='screen',
+        additional_env={'ROS_NAMESPACE': namespace}
+    )
 
     # # ROS2 Controllers
     # control_group_action = GroupAction([
@@ -157,14 +161,22 @@ def generate_launch_description():
     #         output='screen',
     #     )
     # ])
-
+    
+    # Create the launch description and populate
     ld = LaunchDescription()
+
+    # Add the namespace declaration
+    ld.add_action(namespace_arg)
+
+    # Add the launch arguments
     ld.add_action(robot_description_command_arg)
     ld.add_action(is_sim_arg)
-    ld.add_action(namespace_arg)
-    ld.add_action(localization_group_action)
+
+    # Add the nodes to the launch description
     ld.add_action(controller_manager_node)
-    ld.add_action(joint_state_broadcaster_node)
-    ld.add_action(velocity_controller_node)
+    ld.add_action(ekf_node)
+    ld.add_action(imu_filter_node)
+    ld.add_action(joint_state_broadcaster_spawner)
+    ld.add_action(velocity_controller_spawner)
 
     return ld
