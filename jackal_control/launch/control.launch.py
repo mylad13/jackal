@@ -94,38 +94,39 @@ def generate_launch_description():
             condition=UnlessCondition(is_sim)
         )
     
-    # velocity_controller_node = Node(
-    #     package='controller_manager',
-    #     executable='spawner.py',
-    #     name='velocity_controller_spawner',
-    #     namespace=namespace,
-    #     output='screen',
-    #     arguments=['jackal_velocity_controller']
-    # )
-
-    
-    # # Add the joint_state_broadcaster spawner
-    # joint_state_broadcaster_node = Node(
-    #     package='controller_manager',
-    #     executable='spawner.py',
-    #     namespace=namespace,
-    #     output='screen',
-    #     arguments=['joint_state_broadcaster']
-    # )
-    
-    # Alternative way to add the nodes, worth exploring:
-    # Add the joint_state_broadcaster spawner
-    joint_state_broadcaster_spawner = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'joint_state_broadcaster'],
+    # Add the velocity_controller spawner
+    velocity_controller_node = Node(
+        package='controller_manager',
+        executable='spawner',
+        name='velocity_controller_spawner',
+        namespace=namespace,
         output='screen',
-        additional_env={'ROS_NAMESPACE': namespace}
+        arguments=['jackal_velocity_controller']
     )
 
-    # Add the velocity_controller spawner
-    velocity_controller_spawner = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'jackal_velocity_controller'],
+    
+    # Add the joint_state_broadcaster spawner
+    joint_state_broadcaster_node = Node(
+        package='controller_manager',
+        executable='spawner',
+        namespace=namespace,
         output='screen',
-        additional_env={'ROS_NAMESPACE': namespace}
+        arguments=['joint_state_broadcaster']
+    )
+    
+    # # Alternative way to add the nodes, worth exploring:
+    # # Add the joint_state_broadcaster spawner
+    # velocity_controller_node = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'joint_state_broadcaster'],
+    #     output='screen',
+    #     additional_env={'ROS_NAMESPACE': namespace}
+    # )
+
+    # # Add the velocity_controller spawner
+    # joint_state_broadcaster_node = ExecuteProcess(
+    #     cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'jackal_velocity_controller'],
+    #     output='screen',
+    #     additional_env={'ROS_NAMESPACE': namespace}
     )
 
     # # ROS2 Controllers
@@ -176,7 +177,7 @@ def generate_launch_description():
     ld.add_action(controller_manager_node)
     ld.add_action(ekf_node)
     ld.add_action(imu_filter_node)
-    ld.add_action(joint_state_broadcaster_spawner)
-    ld.add_action(velocity_controller_spawner)
+    ld.add_action(joint_state_broadcaster_node)
+    ld.add_action(velocity_controller_node)
 
     return ld
