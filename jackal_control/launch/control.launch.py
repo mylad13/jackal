@@ -101,7 +101,8 @@ def generate_launch_description():
         name='velocity_controller_spawner',
         namespace=namespace,
         output='screen',
-        arguments=['jackal_velocity_controller', '--controller-type', 'velocity_controllers/JointGroupVelocityController']
+        arguments=['jackal_velocity_controller', '--controller-type', 'velocity_controllers/JointGroupVelocityController'],
+        parameters=[config_jackal_velocity_controller]
     )
 
     
