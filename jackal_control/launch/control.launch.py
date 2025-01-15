@@ -101,7 +101,7 @@ def generate_launch_description():
         name='velocity_controller_spawner',
         namespace=namespace,
         output='screen',
-        arguments=['jackal_velocity_controller', '--controller-type', 'velocity_controllers/JointGroupVelocityController'],
+        arguments=['jackal_velocity_controller', '--controller-type', 'diff_drive_controller/DiffDriveController'],
         parameters=[config_jackal_velocity_controller]
     )
 
@@ -113,7 +113,8 @@ def generate_launch_description():
         name='joint_state_broadcaster_spawner',
         namespace=namespace,
         output='screen',
-        arguments=['joint_state_broadcaster', '--controller-type', 'joint_state_broadcaster/JointStateBroadcaster']
+        arguments=['joint_state_broadcaster', '--controller-type', 'joint_state_broadcaster/JointStateBroadcaster'],
+        parameters=[config_jackal_velocity_controller]
     )
     
     # # Alternative way to add the nodes, worth exploring:
