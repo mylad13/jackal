@@ -2,7 +2,7 @@
 <robot>
 
   <gazebo>
-    <plugin filename="ign_ros2_control-system" name="$(arg prefix)ign_ros2_control::IgnitionROS2ControlPlugin"> <!-- ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
+    <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin"> <!-- ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
     <!-- <plugin filename="ign_ros2_control-system" name="$(arg prefix)ign_ros2_control::IgnitionROS2ControlPlugin"> ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
     <!-- <plugin name="$(arg prefix)gazebo_ros2_control" filename="libgazebo_ros2_control.so"> -->
       <!-- <robot_param>"$(arg prefix)/robot_description"</robot_param>
