@@ -1,4 +1,4 @@
-/jc0_0:
+jc0_0:
   controller_manager:
     ros__parameters:
       update_rate: 50  # Hz
@@ -9,7 +9,7 @@
       jackal_velocity_controller:
         type: diff_drive_controller/DiffDriveController
 
-/jc0_0:
+jc0_0:
   jackal_velocity_controller:
     ros__parameters:
       left_wheel_names: [ "front_left_wheel_joint", "rear_left_wheel_joint" ]
@@ -68,7 +68,7 @@
       angular.z.max_jerk: 0.0
       angular.z.min_jerk: 0.0
 
-/jc0_1/controller_manager:
+jc0_1/controller_manager:
   ros__parameters:
     update_rate: 50  # Hz
 
@@ -78,7 +78,7 @@
     jackal_velocity_controller:
       type: diff_drive_controller/DiffDriveController
 
-/jc0_1/jackal_velocity_controller:
+jc0_1/jackal_velocity_controller:
   ros__parameters:
     left_wheel_names: [ "front_left_wheel_joint", "rear_left_wheel_joint" ]
     right_wheel_names: [ "front_right_wheel_joint", "rear_right_wheel_joint" ]
@@ -136,7 +136,7 @@
     angular.z.max_jerk: 0.0
     angular.z.min_jerk: 0.0
 
-/jc0_2/controller_manager:
+jc0_2/controller_manager:
   ros__parameters:
     update_rate: 50  # Hz
 
@@ -146,7 +146,7 @@
     jackal_velocity_controller:
       type: diff_drive_controller/DiffDriveController
 
-/jc0_2/jackal_velocity_controller:
+jc0_2/jackal_velocity_controller:
   ros__parameters:
     left_wheel_names: [ "front_left_wheel_joint", "rear_left_wheel_joint" ]
     right_wheel_names: [ "front_right_wheel_joint", "rear_right_wheel_joint" ]

@@ -25,7 +25,7 @@ def generate_launch_description():
     config_jackal_velocity_controller = PathJoinSubstitution(
         [FindPackageShare('jackal_control'),
         'config',
-        'control.yaml'],
+        'control_all.yaml'],
     )
 
     # Launch Arguments
