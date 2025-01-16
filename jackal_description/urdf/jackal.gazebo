@@ -7,11 +7,11 @@
     <!-- <plugin name="$(arg prefix)gazebo_ros2_control" filename="libgazebo_ros2_control.so"> -->
       <!-- <robot_param>robot_description</robot_param>
       <robot_param_node>robot_state_publisher</robot_param_node> -->
-      <!-- <parameters>$(find jackal_control)/config/control.yaml</parameters> -->
+      <parameters>$(find jackal_control)/config/control.yaml</parameters>
       <ros>
         <namespace>$(arg prefix)</namespace>
       </ros>
-      <!-- <controller_manager_name>"controller_manager"</controller_manager_name> -->
+      <controller_manager_name>$(arg prefix)controller_manager</controller_manager_name>
     </plugin>
   </gazebo>
 
