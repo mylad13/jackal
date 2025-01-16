@@ -5,8 +5,8 @@
     <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin"> <!-- ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
     <!-- <plugin filename="ign_ros2_control-system" name="$(arg prefix)ign_ros2_control::IgnitionROS2ControlPlugin"> ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
     <!-- <plugin name="$(arg prefix)gazebo_ros2_control" filename="libgazebo_ros2_control.so"> -->
-      <robot_param>"robot_description"</robot_param>
-      <robot_param_node>"robot_state_publisher"</robot_param_node>
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
       <parameters>$(arg gazebo_controllers)</parameters>
       <ros>
         <namespace>$(arg prefix)</namespace>
