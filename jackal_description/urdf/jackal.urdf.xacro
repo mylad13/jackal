@@ -256,8 +256,7 @@
   <ros2_control name="jackal_hardware" type="system">
     <hardware>
       <xacro:if value="$(arg is_sim)">
-        <!-- <plugin>ign_ros2_control/IgnitionSystem</plugin> ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
-        <plugin>gz_ros2_control/GazeboSimSystem</plugin> <!-- ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
+        <plugin>ign_ros2_control/IgnitionSystem</plugin> <!-- ign_ros2_control works with Gazebo Fortress and ROS2 Humble -->
       </xacro:if>
       <xacro:unless value="$(arg is_sim)">
         <plugin>jackal_hardware/JackalHardware</plugin>
