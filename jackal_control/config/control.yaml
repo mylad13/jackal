@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 50  # Hz
+    update_rate: 25  # Hz
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -69,7 +69,7 @@ jackal_velocity_controller:
 jc0_0:
   controller_manager:
     ros__parameters:
-      update_rate: 50  # Hz
+      update_rate: 25  # Hz
 
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
@@ -139,7 +139,7 @@ jc0_0:
 jc0_1:
   controller_manager:
     ros__parameters:
-      update_rate: 50  # Hz
+      update_rate: 25  # Hz
 
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
@@ -209,7 +209,7 @@ jc0_1:
 jc0_2:
   controller_manager:
     ros__parameters:
-      update_rate: 50  # Hz
+      update_rate: 25  # Hz
 
       joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
