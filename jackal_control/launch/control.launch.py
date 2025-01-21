@@ -175,7 +175,7 @@ def generate_launch_description():
     ld.add_action(namespace_arg)
 
     # Add the launch arguments
-    ld.add_action(robot_description_command_arg)
+    # ld.add_action(robot_description_command_arg)
     ld.add_action(is_sim_arg)
 
     # Add the nodes to the launch description
