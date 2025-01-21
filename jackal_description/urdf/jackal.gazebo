@@ -17,7 +17,7 @@
 
   <gazebo reference="$(arg prefix)imu_link">
     <sensor name="$(arg prefix)imu_sensor" type="imu">
-    <plugin filename="libgazebo_ros_imu_sensor.so" name="$(arg prefix)imu_plugin">
+    <plugin filename="libgazebo_ros_imu_sensor.so" name="$(arg prefix)imu_plugin"> <!-- libgazebo_ros_imu_sensor.so might be outdated for Ingition Gazebo -->
         <ros>
           <namespace>$(arg prefix)</namespace>
           <remapping>~/out:=imu/data_raw</remapping>
@@ -32,7 +32,7 @@
 
   <gazebo reference="$(arg prefix)gps_link">
     <sensor name="$(arg prefix)gps_sensor" type="gps">
-    <plugin filename="libgazebo_ros_gps_sensor.so" name="$(arg prefix)gps_plugin">
+    <plugin filename="libgazebo_ros_gps_sensor.so" name="$(arg prefix)gps_plugin"> <!-- libgazebo_ros_gps_sensor.so might be outdated for Ingition Gazebo -->
         <ros>
           <namespace>$(arg prefix)</namespace>
           <remapping>~/out:=gps/data</remapping>
