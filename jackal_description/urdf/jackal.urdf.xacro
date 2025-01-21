@@ -263,22 +263,22 @@
         <plugin>fake_components/GenericSystem</plugin>
       </xacro:unless>
     </hardware>
-    <joint name="front_left_wheel_joint"> <!-- should it be joint name="$(arg prefix)front_left_wheel_joint" -->
+    <joint name="$(arg prefix)front_left_wheel_joint"> <!-- should it be joint name="$(arg prefix)front_left_wheel_joint" -->
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="rear_left_wheel_joint">
+    <joint name="$(arg prefix)rear_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="front_right_wheel_joint">
+    <joint name="$(arg prefix)front_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="rear_right_wheel_joint">
+    <joint name="$(arg prefix)rear_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
