@@ -29,7 +29,7 @@ jc0_0:
       pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
       twist_covariance_diagonal: [1000000.0, 1000000.0, 0.03, 1000000.0, 1000000.0, 0.03]
 
-      open_loop: true
+      open_loop: false
       enable_odom_tf: true
 
       cmd_vel_timeout: 0.25
@@ -99,7 +99,7 @@ jc0_1:
       pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
       twist_covariance_diagonal: [1000000.0, 1000000.0, 0.03, 1000000.0, 1000000.0, 0.03]
 
-      open_loop: true
+      open_loop: false
       enable_odom_tf: true
 
       cmd_vel_timeout: 0.25
@@ -169,7 +169,7 @@ jc0_2:
       pose_covariance_diagonal : [0.001, 0.001, 1000000.0, 1000000.0, 1000000.0, 0.03]
       twist_covariance_diagonal: [1000000.0, 1000000.0, 0.03, 1000000.0, 1000000.0, 0.03]
 
-      open_loop: true
+      open_loop: false
       enable_odom_tf: true
 
       cmd_vel_timeout: 0.25
