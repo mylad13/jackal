@@ -281,7 +281,7 @@ diff0:
     ros__parameters:
       update_rate: 10  # Hz
 
-      joint_state_broadcaster:
+      diffbot_joint_state_broadcaster:
         type: joint_state_broadcaster/JointStateBroadcaster
 
       diffbot_base_controller:
