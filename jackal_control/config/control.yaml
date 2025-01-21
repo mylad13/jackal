@@ -12,8 +12,8 @@ jc0_0:
 jc0_0:
   jackal_velocity_controller:
     ros__parameters:
-      left_wheel_names: [ "jc0_0front_left_wheel_joint", "jc0_0rear_left_wheel_joint" ]
-      right_wheel_names: [ "jc0_0front_right_wheel_joint", "jc0_0rear_right_wheel_joint" ]
+      left_wheel_names: [ "front_left_wheel_joint", "rear_left_wheel_joint" ]
+      right_wheel_names: [ "front_right_wheel_joint", "rear_right_wheel_joint" ]
 
       wheel_separation: 0.36 
       wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
@@ -82,8 +82,8 @@ jc0_1:
 jc0_1:
   jackal_velocity_controller:
     ros__parameters:
-      left_wheel_names: [ "jc0_1front_left_wheel_joint", "jc0_1rear_left_wheel_joint" ]
-      right_wheel_names: [ "jc0_1front_right_wheel_joint", "jc0_1rear_right_wheel_joint" ]
+      left_wheel_names: [ "front_left_wheel_joint", "rear_left_wheel_joint" ]
+      right_wheel_names: [ "front_right_wheel_joint", "rear_right_wheel_joint" ]
 
       wheel_separation: 0.36 
       wheels_per_side: 1  # actually 2, but both are controlled by 1 signal

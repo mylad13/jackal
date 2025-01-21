@@ -121,7 +121,7 @@
       <!-- Center of mass -->
       <origin xyz="0.012  0.002 0.067" rpy="0 0 0"/>
       <mass value="16.523"/>
-      <!-- Moments of inertia ( chassis without wheels ) -->
+      <!-- Moments of inertia: ( chassis without wheels ) -->
       <inertia
         ixx="0.3136" ixy="-0.0008" ixz="0.0164"
         iyy="0.3922" iyz="-0.0009"
@@ -199,7 +199,7 @@
     <child link="rear_fender_link" />
   </joint>
 
-  <!-- TODO Make this internal_imu_link or something, and use a mixed-in xacro
+  <!-- TODO: Make this internal_imu_link or something, and use a mixed-in xacro
        to supply the joint between it and imu_link. This is important so that imu_link
        always points to the "active" IMU. When an upgrade IMU is connected, the
        internal_imu_link should remain, but imu_link should point to the upgrade one. -->
@@ -215,7 +215,7 @@
     <child link="imu_link" />
   </joint>
 
-  <!-- TODO Same note as applies to imu_link -->
+  <!-- TODO: Same note as applies to imu_link -->
   <link name="navsat_link">
     <visual>
       <geometry>
@@ -263,22 +263,22 @@
         <plugin>fake_components/GenericSystem</plugin>
       </xacro:unless>
     </hardware>
-    <joint name="$(arg prefix)front_left_wheel_joint"> <!-- should it be joint name="$(arg prefix)front_left_wheel_joint" -->
+    <joint name="front_left_wheel_joint"> <!-- should it be joint name="$(arg prefix)front_left_wheel_joint" -->
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)rear_left_wheel_joint">
+    <joint name="rear_left_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)front_right_wheel_joint">
+    <joint name="front_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
-    <joint name="$(arg prefix)rear_right_wheel_joint">
+    <joint name="rear_right_wheel_joint">
       <command_interface name="velocity"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
